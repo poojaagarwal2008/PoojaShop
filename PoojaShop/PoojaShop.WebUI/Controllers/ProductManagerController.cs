@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PoojaShop.Core.Models;
+using PoojaShop.Core.ViewModels;
 using PoojaShop.DataAccess.InMemory;
 
 namespace PoojaShop.WebUI.Controllers
@@ -11,10 +12,12 @@ namespace PoojaShop.WebUI.Controllers
     public class ProductManagerController : Controller
     {
         ProductRepositiory context;
+        ProductCategoryRepository productCategories;
 
         public ProductManagerController()
         {
-            context = new ProductRepositiory();     
+            context = new ProductRepositiory();
+            productCategories = new ProductCategoryRepository();
         }
 
 
@@ -27,8 +30,11 @@ namespace PoojaShop.WebUI.Controllers
 
         public ActionResult Create()
         {
-            Product product = new Product();
-            return View(product);
+            ProductManagerViewModel viewModel = new ProductManagerViewModel();
+
+            viewModel.Product = new Product();
+            viewModel.ProductCategories = productCategories.Collection();
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -55,7 +61,11 @@ namespace PoojaShop.WebUI.Controllers
             }
             else
             {
-                return View(productToUpdate);
+                ProductManagerViewModel viewModel = new ProductManagerViewModel();
+
+                viewModel.Product = productToUpdate;
+                viewModel.ProductCategories = productCategories.Collection();
+                return View(viewModel);
             }
         }
 
