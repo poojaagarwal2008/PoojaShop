@@ -11,13 +11,13 @@ namespace PoojaShop.WebUI.Controllers
 {
     public class ProductManagerController : Controller
     {
-        ProductRepositiory context;
-        ProductCategoryRepository productCategories;
+        InMemoryRepository<Product> context;
+        InMemoryRepository<ProductCategory> productCategories;
 
         public ProductManagerController()
         {
-            context = new ProductRepositiory();
-            productCategories = new ProductCategoryRepository();
+            context = new InMemoryRepository<Product>();
+            productCategories = new InMemoryRepository<ProductCategory>();
         }
 
 
