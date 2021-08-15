@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PoojaShop.Core.Contracts;
 using PoojaShop.Core.Models;
 using PoojaShop.Core.ViewModels;
 using PoojaShop.DataAccess.InMemory;
@@ -11,13 +12,15 @@ namespace PoojaShop.WebUI.Controllers
 {
     public class ProductManagerController : Controller
     {
-        InMemoryRepository<Product> context;
-        InMemoryRepository<ProductCategory> productCategories;
+        IRepository<Product> context;
+        IRepository<ProductCategory> productCategories;
 
-        public ProductManagerController()
+        //In order to inject the dependencies we need to use DI Container so we nweed to install Unity.MVC and Unity.Container
+        //We need to register the repositories in UnityConfig.cs file in App_Start folder under RegisterTypes method
+        public ProductManagerController(IRepository<Product> product, IRepository<ProductCategory> productCategory)
         {
-            context = new InMemoryRepository<Product>();
-            productCategories = new InMemoryRepository<ProductCategory>();
+            context = product;
+            productCategories = productCategory;
         }
 
 

@@ -4,17 +4,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PoojaShop.Core.Models;
+using PoojaShop.Core.Contracts;
 using PoojaShop.DataAccess.InMemory;
 
 namespace PoojaShop.WebUI.Controllers
 {
     public class ProductCategoryManagerController : Controller
     {
-        InMemoryRepository<ProductCategory> context;
+        IRepository<ProductCategory> context;
 
-        public ProductCategoryManagerController()
+        //Dependency Injection
+        //We need to register the repositories in UnityConfig.cs file in App_Start folder under RegisterTypes method
+        public ProductCategoryManagerController(IRepository<ProductCategory> productCategory)
         {
-            context = new InMemoryRepository<ProductCategory>();
+            context = productCategory;
         }
 
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Caching;
 using PoojaShop.Core.Models;
+using PoojaShop.Core.Contracts;
 
 //Generic Class
 //Initially we took a generic class T but there was nothing to specify that T class has an ID.
@@ -12,7 +13,7 @@ using PoojaShop.Core.Models;
 //another base class[BaseEntity] having this ID and inherit all classes from that base class.
 namespace PoojaShop.DataAccess.InMemory
 {
-    public class InMemoryRepository<T> where T: BaseEntity
+    public class InMemoryRepository<T> : IRepository<T> where T : BaseEntity
     {
         ObjectCache cache = MemoryCache.Default;
         List<T> items;
