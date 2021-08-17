@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -41,7 +42,7 @@ namespace PoojaShop.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(Product product, HttpPostedFileBase file)
         {
             if(!ModelState.IsValid)
             {
@@ -49,6 +50,11 @@ namespace PoojaShop.WebUI.Controllers
             }
             else
             {
+                if(file!= null)
+                {
+                    product.Image = product.Id + Path.GetExtension(file.FileName);
+                    file.SaveAs(Server.MapPath("//Content//ProductImages//") + product.Image);
+                }
                 context.Insert(product);
                 context.commit();
                 return RedirectToAction("Index");
@@ -73,7 +79,7 @@ namespace PoojaShop.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Product product, string Id)
+        public ActionResult Edit(Product product, string Id, HttpPostedFileBase file)
         {
             Product productToUpdate = context.Find(Id);
             if (productToUpdate == null)
@@ -89,6 +95,12 @@ namespace PoojaShop.WebUI.Controllers
                 }
                 else
                 {
+                    if (file != null)
+                    {
+                        product.Image = product.Id + Path.GetExtension(file.FileName);
+                        file.SaveAs(Server.MapPath("//Content//ProductImages//" + product.Image));
+
+                    }
                     productToUpdate.Name = product.Name;
                     productToUpdate.Price = product.Price;
                     productToUpdate.Category = product.Category;
