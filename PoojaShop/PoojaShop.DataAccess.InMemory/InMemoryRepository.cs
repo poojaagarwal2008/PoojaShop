@@ -1,11 +1,9 @@
-﻿using System;
+﻿using PoojaShop.Core.Contracts;
+using PoojaShop.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.Caching;
-using PoojaShop.Core.Models;
-using PoojaShop.Core.Contracts;
 
 //Generic Class
 //Initially we took a generic class T but there was nothing to specify that T class has an ID.

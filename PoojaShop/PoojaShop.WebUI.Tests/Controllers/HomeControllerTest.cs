@@ -1,11 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PoojaShop.WebUI;
-using PoojaShop.WebUI.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
 
 namespace PoojaShop.WebUI.Tests.Controllers
 {

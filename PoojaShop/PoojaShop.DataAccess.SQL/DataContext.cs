@@ -1,10 +1,5 @@
 ﻿using PoojaShop.Core.Models;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PoojaShop.DataAccess.SQL
 {
@@ -12,7 +7,7 @@ namespace PoojaShop.DataAccess.SQL
     {
         //To call the DbContext class constructor using the Default Connection string from web.config
         public DataContext()
-            :base("DefaultConnection")
+            : base("DefaultConnection")
         {
 
         }

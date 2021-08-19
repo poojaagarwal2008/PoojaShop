@@ -1,13 +1,11 @@
-﻿using System;
+﻿using PoojaShop.Core.Contracts;
+using PoojaShop.Core.Models;
+using PoojaShop.Core.ViewModels;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using PoojaShop.Core.Contracts;
-using PoojaShop.Core.Models;
-using PoojaShop.Core.ViewModels;
-using PoojaShop.DataAccess.InMemory;
 
 namespace PoojaShop.WebUI.Controllers
 {
@@ -28,7 +26,7 @@ namespace PoojaShop.WebUI.Controllers
         // GET: ProductManager
         public ActionResult Index()
         {
-            List<Product> products = context.Collection().ToList(); 
+            List<Product> products = context.Collection().ToList();
             return View(products);
         }
 
@@ -44,13 +42,13 @@ namespace PoojaShop.WebUI.Controllers
         [HttpPost]
         public ActionResult Create(Product product, HttpPostedFileBase file)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(product);
             }
             else
             {
-                if(file!= null)
+                if (file != null)
                 {
                     product.Image = product.Id + Path.GetExtension(file.FileName);
                     file.SaveAs(Server.MapPath("//Content//ProductImages//") + product.Image);

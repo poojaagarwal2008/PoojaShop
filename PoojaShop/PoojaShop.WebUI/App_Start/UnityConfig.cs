@@ -1,6 +1,5 @@
 using PoojaShop.Core.Contracts;
 using PoojaShop.Core.Models;
-using PoojaShop.DataAccess.InMemory;
 using PoojaShop.DataAccess.SQL;
 using System;
 

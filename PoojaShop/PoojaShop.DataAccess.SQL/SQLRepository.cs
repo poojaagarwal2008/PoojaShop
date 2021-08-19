@@ -1,11 +1,7 @@
 ﻿using PoojaShop.Core.Contracts;
 using PoojaShop.Core.Models;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PoojaShop.DataAccess.SQL
 {
@@ -22,7 +18,7 @@ namespace PoojaShop.DataAccess.SQL
         public IQueryable<T> Collection()
         {
             return dbSet;
-            
+
         }
 
         public void commit()

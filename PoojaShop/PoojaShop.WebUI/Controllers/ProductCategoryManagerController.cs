@@ -1,11 +1,8 @@
-﻿using System;
+﻿using PoojaShop.Core.Contracts;
+using PoojaShop.Core.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using PoojaShop.Core.Models;
-using PoojaShop.Core.Contracts;
-using PoojaShop.DataAccess.InMemory;
 
 namespace PoojaShop.WebUI.Controllers
 {
