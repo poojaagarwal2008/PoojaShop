@@ -10,6 +10,6 @@ namespace PoojaShop.Core.Models
     {
         public string BasketID { get; set; }
         public string ProductID { get; set; }
-        public string Quantity { get; set; }
+        public int Quantity { get; set; }
     }
 }
