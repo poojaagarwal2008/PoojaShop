@@ -47,7 +47,7 @@ namespace PoojaShop.DataAccess.SQL
 
         public void Update(T t)
         {
-            //This is done becuase entity framework does not immediately commit the changes to db rather it
+            //This is done because entity framework does not immediately commit the changes to db rather it
             //does so when commit calls the SaveChanges method. Hence we need to attach the updated t to dbSet
             //and then state it as modified so that the changes are commited to db at the time of commit.
             dbSet.Attach(t);
