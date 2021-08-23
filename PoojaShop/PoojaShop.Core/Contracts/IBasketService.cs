@@ -13,6 +13,6 @@ namespace PoojaShop.Core.Contracts
         void AddToBasket(HttpContextBase httpContext, string productID);
         void RemoveFromBasket(HttpContextBase httpContext, string itemId);
         List<BasketItemViewModel> GetBasketItems(HttpContextBase httpContext);
-        BasketSummaryViewModel GetBasketSummary(HttpContextBase httpContext);
+        BasketSummaryViewModel BasketSummary(HttpContextBase httpContext);
     }
 }

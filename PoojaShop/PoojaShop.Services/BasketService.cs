@@ -97,7 +97,7 @@ namespace PoojaShop.Services
         public void RemoveFromBasket(HttpContextBase httpContext, string itemId)
         {
             Basket basket = GetBasket(httpContext, true);
-            BasketItem item = basket.BasketItems.FirstOrDefault(b => b.ProductID == itemId);
+            BasketItem item = basket.BasketItems.FirstOrDefault(b => b.Id == itemId);
             if(item!=null)
             {
                 basket.BasketItems.Remove(item);
@@ -128,7 +128,7 @@ namespace PoojaShop.Services
             }
         }
 
-        public BasketSummaryViewModel GetBasketSummary(HttpContextBase httpContext)
+        public BasketSummaryViewModel BasketSummary(HttpContextBase httpContext)
         {
             Basket basket = GetBasket(httpContext, false);
             BasketSummaryViewModel model = new BasketSummaryViewModel(0,0);
@@ -144,10 +144,13 @@ namespace PoojaShop.Services
 
                 model.BasketCount = basketCount ?? 0;
                 model.BasketTotal = basketTotal ?? decimal.Zero;
+                return model;
             }
-           
-        return model;
-            
+            else
+            {
+                return model;
+            }
+
         }
     }
 }

@@ -1,8 +1,8 @@
 using PoojaShop.Core.Contracts;
 using PoojaShop.Core.Models;
 using PoojaShop.DataAccess.SQL;
+using PoojaShop.Services;
 using System;
-
 using Unity;
 
 namespace PoojaShop.WebUI
@@ -47,6 +47,9 @@ namespace PoojaShop.WebUI
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<IRepository<Product>, SQLRepository<Product>>();
             container.RegisterType<IRepository<ProductCategory>, SQLRepository<ProductCategory>>();
+            container.RegisterType<IRepository<Basket>, SQLRepository<Basket>>();
+            container.RegisterType<IRepository<BasketItem>, SQLRepository<BasketItem>>();
+            container.RegisterType<IBasketService, BasketService>();
         }
     }
 }
