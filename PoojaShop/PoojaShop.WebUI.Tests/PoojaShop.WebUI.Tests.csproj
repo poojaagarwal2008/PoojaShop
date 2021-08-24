@@ -89,6 +89,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mocks\MockContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
@@ -99,6 +100,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PoojaShop.Core\PoojaShop.Core.csproj">
+      <Project>{02CE1B55-D7A1-46CB-BB40-2F34181EEEE6}</Project>
+      <Name>PoojaShop.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PoojaShop.WebUI\PoojaShop.WebUI.csproj">
       <Project>{756C4E2E-4B52-4C6E-828B-B0BAA7AA95E6}</Project>
       <Name>PoojaShop.WebUI</Name>
