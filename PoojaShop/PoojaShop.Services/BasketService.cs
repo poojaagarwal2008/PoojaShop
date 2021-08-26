@@ -140,7 +140,7 @@ namespace PoojaShop.Services
 
                 decimal? basketTotal = (from item in basket.BasketItems
                                         join p in productContext.Collection() on item.ProductID equals p.Id
-                                        select p.Price).Sum();
+                                        select p.Price * item.Quantity).Sum();
 
                 model.BasketCount = basketCount ?? 0;
                 model.BasketTotal = basketTotal ?? decimal.Zero;
