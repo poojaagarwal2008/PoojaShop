@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using PoojaShop.Core.Contracts;
+using PoojaShop.Core.Models;
 using PoojaShop.WebUI.Models;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,15 +16,11 @@ namespace PoojaShop.WebUI.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IRepository<Customer> _customerRepository;
 
-        public AccountController()
+        public AccountController(IRepository<Customer> customerRepository)
         {
-        }
-
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
+            this._customerRepository = customerRepository;
         }
 
         public ApplicationSignInManager SignInManager
@@ -48,7 +46,6 @@ namespace PoojaShop.WebUI.Controllers
                 _userManager = value;
             }
         }
-
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -152,6 +149,23 @@ namespace PoojaShop.WebUI.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //register the customer model
+                    Customer customer = new Customer()
+                    {
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        Email = model.Email,
+                        Street = model.Street,
+                        City = model.City,
+                        State = model.State,
+                        Zipcode = model.Zipcode,
+                        UserID = user.Id
+                    };
+
+                    _customerRepository.Insert(customer);
+                    _customerRepository.commit();
+
+
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

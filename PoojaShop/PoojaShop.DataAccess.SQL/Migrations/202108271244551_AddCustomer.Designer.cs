@@ -7,13 +7,13 @@ namespace PoojaShop.DataAccess.SQL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class Initial : IMigrationMetadata
+    public sealed partial class AddCustomer : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddCustomer));
         
         string IMigrationMetadata.Id
         {
-            get { return "202108161913571_Initial"; }
+            get { return "202108271244551_AddCustomer"; }
         }
         
         string IMigrationMetadata.Source
