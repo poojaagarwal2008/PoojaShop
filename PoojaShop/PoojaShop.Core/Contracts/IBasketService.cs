@@ -14,5 +14,6 @@ namespace PoojaShop.Core.Contracts
         void RemoveFromBasket(HttpContextBase httpContext, string itemId);
         List<BasketItemViewModel> GetBasketItems(HttpContextBase httpContext);
         BasketSummaryViewModel BasketSummary(HttpContextBase httpContext);
+        void ClearBasket(HttpContextBase httpContext);
     }
 }
