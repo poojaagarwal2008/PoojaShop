@@ -7,6 +7,7 @@ using PoojaShop.WebUI.Controllers;
 using PoojaShop.WebUI.Tests.Mocks;
 using System;
 using System.Linq;
+using System.Security.Principal;
 using System.Web.Mvc;
 
 namespace PoojaShop.WebUI.Tests.Controllers
@@ -21,11 +22,12 @@ namespace PoojaShop.WebUI.Tests.Controllers
             IRepository<Basket> basketContext = new MockContext<Basket>();
             IRepository<Product> productContext = new MockContext<Product>();
             IRepository<Order> orderContext = new MockContext<Order>();
+            IRepository<Customer> customerContext = new MockContext<Customer>();
 
             var httpContext = new MockHttpContext();
             IBasketService basketService = new BasketService(productContext, basketContext);
             IOrderService orderService = new OrderService(orderContext);
-            var basketController = new BasketController(basketService, orderService);
+            var basketController = new BasketController(basketService, orderService, customerContext);
             basketController.ControllerContext = new ControllerContext(httpContext, new System.Web.Routing.RouteData(), basketController);
 
             //Act
@@ -48,6 +50,7 @@ namespace PoojaShop.WebUI.Tests.Controllers
             IRepository<Basket> basketContext = new MockContext<Basket>();
             IRepository<Product> productContext = new MockContext<Product>();
             IRepository<Order> orderContext = new MockContext<Order>();
+            IRepository<Customer> customerContext = new MockContext<Customer>();
             var httpContext = new MockHttpContext();
             Basket basket = new Basket();
             httpContext.Request.Cookies.Add(new System.Web.HttpCookie("eCommerceBasket") { Value = basket.Id });
@@ -62,7 +65,7 @@ namespace PoojaShop.WebUI.Tests.Controllers
 
             IBasketService basketService = new BasketService(productContext, basketContext);
             IOrderService orderService = new OrderService(orderContext);
-            BasketController controller = new BasketController(basketService, orderService);
+            BasketController controller = new BasketController(basketService, orderService, customerContext);
             controller.ControllerContext = new ControllerContext(httpContext, new System.Web.Routing.RouteData(), controller);
 
             var partialViewResult = controller.BasketSummary() as PartialViewResult;
@@ -94,9 +97,17 @@ namespace PoojaShop.WebUI.Tests.Controllers
             IRepository<Order> orderContext = new MockContext<Order>();
             IOrderService orderService = new OrderService(orderContext);
 
-            var controller = new BasketController(basketService, orderService);
+            IRepository<Customer> customerContext = new MockContext<Customer>();
+            customerContext.Insert(new Customer { Id = "1", Email = "pooja.agarwal@PoojaShop.com", Zipcode = "734101" });
+            //Add the above email address to the below method and pass the above email to pass a fake logged in user
+            //We also pass the type of authentication as Forms and the roles are passed as null
+            IPrincipal FakeUser = new GenericPrincipal(new GenericIdentity("pooja.agarwal@PoojaShop.com","Forms"),null);
+
+
+            var controller = new BasketController(basketService, orderService, customerContext);
 
             var httpContext = new MockHttpContext();
+            httpContext.User = FakeUser;
             httpContext.Request.Cookies.Add(new System.Web.HttpCookie("eCommerceBasket")
             {
                 Value = basket.Id

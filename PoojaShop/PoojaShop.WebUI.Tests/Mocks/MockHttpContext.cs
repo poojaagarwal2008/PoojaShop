@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -12,6 +13,20 @@ namespace PoojaShop.WebUI.Tests.Mocks
         private MockRequest request;
         private MockResponse response;
         private HttpCookieCollection cookies;
+        //to bypass Authorize in CHECKOUT method
+        private IPrincipal fakeUser;
+
+        public override IPrincipal User
+        {
+            get
+            {
+                return this.fakeUser;
+            }
+            set
+            {
+                this.fakeUser = value;
+            }
+        }
 
         public MockHttpContext()
         {
@@ -19,6 +34,7 @@ namespace PoojaShop.WebUI.Tests.Mocks
             //We are instantiating with cookies to ensure same cookies are used in request and response
             this.request = new MockRequest(cookies);
             this.response = new MockResponse(cookies);
+
         }
 
         public override HttpRequestBase Request
