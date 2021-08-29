@@ -6,6 +6,8 @@ using System.Web.Mvc;
 
 namespace PoojaShop.WebUI.Controllers
 {
+    //Tpo only allow users with Admin role to access the Admin views
+    [Authorize(Roles="Admin")]
     public class AdminController : Controller
     {
         // GET: Admin

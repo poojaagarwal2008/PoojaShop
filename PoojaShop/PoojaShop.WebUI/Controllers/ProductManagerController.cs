@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace PoojaShop.WebUI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductManagerController : Controller
     {
         IRepository<Product> context;
